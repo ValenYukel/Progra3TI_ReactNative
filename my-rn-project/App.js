@@ -1,17 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { Text, View, StyleSheet } from 'react-native';
+import MiPrimerComponente from './src/components/MiPrimerComponente';
+import Home from './src/screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigation from './src/navigation/StackNavigation';
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>En App.js esta esto</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StackNavigation />
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
