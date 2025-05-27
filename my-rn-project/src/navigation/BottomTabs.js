@@ -18,6 +18,7 @@ export default function BottomTabs() {
           }}
           />
         <Tab.Screen name='Perfil' component={Perfil} />
+        <Tab.Screen name='Posteo' component={Posteo} />
     </Tab.Navigator>
   )
 }

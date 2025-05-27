@@ -42,9 +42,7 @@ class Registro extends Component {
 
             db.collection('users')
             .add({
-                owner: email,
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
+                email: email,
                 usuario: usuario
             })
             .then(() => {
