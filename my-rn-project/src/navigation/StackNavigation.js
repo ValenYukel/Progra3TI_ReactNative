@@ -13,16 +13,7 @@ export default function StackNavigation() {
         <Stack.Navigator>
         <Stack.Screen 
        name='Register' 
-       component={Register}
-       options={
-           {
-               headerShown: false
-           }
-       }
-       />
-       <Stack.Screen 
-       name='Login' 
-       component={Login}
+       component={Registro}
        options={
            {
                headerShown: false
