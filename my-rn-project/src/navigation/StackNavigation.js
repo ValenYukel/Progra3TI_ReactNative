@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import Home from "../screens/Home";
+import Login from "../screens/Login";
 import BottomTabs from './BottomTabs'
 import Registro from "../screens/Registro";
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,15 @@ export default function StackNavigation() {
         <Stack.Screen 
        name='Register' 
        component={Registro}
+       options={
+           {
+               headerShown: false
+           }
+       }
+       />
+       <Stack.Screen 
+       name='LogIn' 
+       component={Login}
        options={
            {
                headerShown: false
