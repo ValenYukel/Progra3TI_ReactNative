@@ -3,7 +3,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 //import Home from '../screens/Home';
 //import Registro from '../screens/Registro';
-//import Perfil from '../screens/Perfil';
+import Perfil from '../screens/Perfil';
 import { FontAwesome } from '@expo/vector-icons'
 
 const Tab= createBottomTabNavigator();

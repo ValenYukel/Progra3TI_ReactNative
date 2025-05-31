@@ -6,11 +6,13 @@ import Perfil from './src/screens/Perfil';
 
 
 export default function App() {
-  return  <Perfil />;
-    
-    //<NavigationContainer>
-    //  <StackNavigation />
-    //</NavigationContainer>
+  return (
+  
+  <NavigationContainer>
+     <StackNavigation />
+  </NavigationContainer>
+  
+)
   
 }
 
