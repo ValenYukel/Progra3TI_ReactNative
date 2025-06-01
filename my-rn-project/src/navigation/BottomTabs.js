@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-//import Home from '../screens/Home';
+import Home from '../screens/Home';
 //import Registro from '../screens/Registro';
 import Perfil from '../screens/Perfil';
+import CrearPosteo from '../screens/CrearPosteo';
 import { FontAwesome } from '@expo/vector-icons'
 
 const Tab= createBottomTabNavigator();
@@ -18,7 +19,7 @@ export default function BottomTabs() {
           }}
           />
         <Tab.Screen name='Perfil' component={Perfil} />
-        <Tab.Screen name='Posteo' component={Posteo} />
+        <Tab.Screen name='CrearPosteo' component={CrearPosteo} />
     </Tab.Navigator>
   )
 }

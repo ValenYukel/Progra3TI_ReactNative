@@ -1,54 +1,108 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleSheet} from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../firebase/config'
-//import Usuario from '../components/Usuario'
 import Publicacion from '../components/Publicacion'
+
 
 export default class Perfil extends Component {
   constructor(props){
     super(props)
     this.state = {
-      usuarios: []
+      posteos: [],
+      usuario: ''
     }
   }
 
   componentDidMount(){
-    db.collection('users').orderBy('createdAt', 'desc').onSnapshot((docs) => {
-      let arrDocs = [];
-      docs.forEach((doc) => arrDocs.push({
+    db.collection('posts').orderBy('createdAt', 'desc').onSnapshot((docs) => {
+      let posts = [];
+      docs.forEach((doc) => posts.push({
         id: doc.id,
         data: doc.data()
       }))
       this.setState({
-        usuarios: arrDocs
-      }, () => console.log('este es el state', this.state))
+        posteos: posts
+      })
     })
+    db.collection('users')
+      .where('email', '==', auth.currentUser.email).onSnapshot((docs) => {
+        if(docs.docs === undefined) {
+          this.setState({
+            usuario: '...',
+            })
+          return
+        }else{
+        this.setState({
+          usuario: docs.docs[0].data().usuario
+        })
+        }
+    })
+      
+    
   }
 
   logout(){
     auth.signOut()
-    .then(()=> this.props.navigation.navigate('Register'))
-    .catch(err => console.log('err en signout', err))
+    .then(()=> this.props.navigation.navigate('LogIn'))
+    .catch(err => console.log('error en signout', err))
   }
   
   render(){
     return (
-      <View>
-        <Text>MI Perfil</Text>
-        <Text>{auth.currentUser.email}</Text>
-        <Text>{auth.currentUser.owner}</Text>
+      <View style={styles.container}>
+        <Text style={styles.titulo}>MI Perfil</Text>        
+        <Text style={styles.usuario}>{this.state.usuario}</Text>
+        <Text style={styles.email}>{auth.currentUser.email}</Text>
 
         <FlatList
-          data={this.state.publicaciones}
+          data={this.state.posteos}
           keyExtractor={(item) =>  item.id.toString()}
           renderItem = {({ item }) => <Publicacion id={item.id} data={item.data} /> }
         />
 
-
-        <TouchableOpacity onPress={() => this.logout()}>
-          <Text>Cerrar Sesion</Text>
+        <TouchableOpacity style={styles.boton} onPress={() => this.logout()}>
+          <Text style={styles.botonTexto}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffe4ec',
+    padding: 20,
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#e75480',
+    marginBottom: 10,
+    alignSelf: 'center'
+  },
+  usuario: {
+    fontSize: 20,
+    color: '#e75480',
+    marginBottom: 5,
+    alignSelf: 'center'
+  },
+  email: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 20,
+    alignSelf: 'center'
+  },
+  boton: {
+    backgroundColor: 'pink',
+    padding: 12,
+    alignItems: 'center',
+    borderRadius: 8,
+    marginTop: 20
+  },
+  botonTexto: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
+  }
+});

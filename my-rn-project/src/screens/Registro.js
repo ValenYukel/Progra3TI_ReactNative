@@ -24,6 +24,7 @@ class Registro extends Component {
     }
 
     registrarUsuario(email, contra, usuario){
+         console.log('Intentando registrar:', email, usuario);
         if(
             (
                 email !== '' &&
@@ -42,12 +43,12 @@ class Registro extends Component {
 
             db.collection('users')
             .add({
-                email: email,
+                email: email.toLowerCase(),
                 usuario: usuario
             })
             .then(() => {
                 this.setState({ error: '' }); 
-                this.props.navigation.navigate('Login');
+                this.props.navigation.navigate('LogIn');
             });
 
           })
@@ -58,47 +59,92 @@ class Registro extends Component {
     }
 
     render(){
+            console.log('Usuario actual:', auth.currentUser);
         return(
-            <View>
-                <TextInput
-                    value={this.state.email}
-                    onChangeText={(text) => this.setState({email: text})}
-                    keyboardType='default'
-                    style={styles.input}
-                />
-                <TextInput
-                    value={this.state.contra}
-                    onChangeText={(text) => this.setState({contra: text})}
-                    keyboardType='default'
-                    style={styles.input}
-                />
-                <TextInput
-                    value={this.state.usuario}
-                    onChangeText={(text) => this.setState({usuario: text})}
-                    keyboardType='default'
-                    style={styles.input}
-                />
-                 {this.state.error !== '' && (
-                    <Text> {this.state.error}</Text>
-                )}
-                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.email, this.state.contra, this.state.usuario)}>
-                    <Text>Registrar usuario</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                    <Text>
-                        Ir al login
-                    </Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+            <Text style={styles.titulo}>Registro</Text>
+            <TextInput
+                value={this.state.email}
+                onChangeText={(text) => this.setState({email: text})}
+                keyboardType='default'
+                style={styles.input}
+                placeholder="Email"
+            />
+            <TextInput
+                value={this.state.contra}
+                onChangeText={(text) => this.setState({contra: text})}
+                keyboardType='default'
+                style={styles.input}
+                placeholder="Contraseña"
+                secureTextEntry
+            />
+            <TextInput
+                value={this.state.usuario}
+                onChangeText={(text) => this.setState({usuario: text})}
+                keyboardType='default'
+                style={styles.input}
+                placeholder="Nombre de usuario"
+            />
+            {this.state.error !== '' && (
+                <Text style={styles.error}>{this.state.error}</Text>
+            )}
+            <TouchableOpacity style={styles.boton} onPress={()=> this.registrarUsuario(this.state.email, this.state.contra, this.state.usuario)}>
+                <Text style={styles.botonTexto}>Registrar usuario</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('LogIn')}>
+                <Text style={styles.link}>Ir al login</Text>
+            </TouchableOpacity>
             </View>
         )
     }
 }
 
-const styles= StyleSheet.create({
-    input:{
-        borderWidth: 1,
-        borderColor: 'pink'
-    }
-})
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffe4ec',
+    padding: 24,
+    justifyContent: 'center',
+  },
+  titulo: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#e75480',
+    marginBottom: 20,
+    alignSelf: 'center'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'pink',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    backgroundColor: 'white',
+    fontSize: 16
+  },
+  boton: {
+    backgroundColor: 'pink',
+    padding: 14,
+    alignItems: 'center',
+    borderRadius: 8,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  botonTexto: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+    alignSelf: 'center'
+  },
+  link: {
+    color: '#e75480',
+    textAlign: 'center',
+    marginTop: 10,
+    textDecorationLine: 'underline'
+  }
+});
 export default Registro

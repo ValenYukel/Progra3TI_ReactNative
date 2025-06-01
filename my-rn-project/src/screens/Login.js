@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { auth, db } from '../firebase/config'
 
+
 export default class Login extends Component {
     constructor(props){
         super(props)
@@ -68,7 +69,7 @@ export default class Login extends Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Register')} 
           >
-          <Text style={styles.link}>¿No tienes cuenta aún? Regístrate para disfrutar!!</Text>
+          <Text style={styles.link}>¿No tienes cuenta aún? Regístrate para comenzar!!</Text>
         </TouchableOpacity>
       </View>
     );
