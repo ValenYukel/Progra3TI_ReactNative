@@ -1,13 +1,11 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-//import Home from "../screens/Home";
 import Login from "../screens/Login";
 import BottomTabs from './BottomTabs'
 import Registro from "../screens/Registro";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigation() {
-    const user = '' //props? no se la verdad despues lo veo
     return (
        
        

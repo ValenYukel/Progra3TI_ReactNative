@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import { auth, db } from '../firebase/config'
 
-//auth.onAuthStateChanged
-
 class Registro extends Component {
     constructor(props){
         super(props)
@@ -31,12 +29,6 @@ class Registro extends Component {
                 contra !== '' &&
                 usuario !== ''
             )
-            &&
-            contra.length >= 6
-            &&
-            email.includes('@') 
-            &&
-            usuario.length > 3
         ){
           auth.createUserWithEmailAndPassword(email, contra)
           .then(() => {
@@ -48,18 +40,19 @@ class Registro extends Component {
             })
             .then(() => {
                 this.setState({ error: '' }); 
-                this.props.navigation.navigate('LogIn');
+                this.props.navigation.navigate('LogIn'); // chequear porque no va al login esto manana
             });
 
           })
-          .catch(err => {
-            this.setState({ error: err.message }); 
+          .catch(error => {
+            this.setState({ error: error.message }) ; 
         });
     }
     }
 
     render(){
             console.log('Usuario actual:', auth.currentUser);
+            console.log(this.state.error);
         return(
             <View style={styles.container}>
             <Text style={styles.titulo}>Registro</Text>
@@ -86,7 +79,7 @@ class Registro extends Component {
                 placeholder="Nombre de usuario"
             />
             {this.state.error !== '' && (
-                <Text style={styles.error}>{this.state.error}</Text>
+                <Text style={styles.error}>{this.state.error}</Text> 
             )}
             <TouchableOpacity style={styles.boton} onPress={()=> this.registrarUsuario(this.state.email, this.state.contra, this.state.usuario)}>
                 <Text style={styles.botonTexto}>Registrar usuario</Text>
