@@ -23,33 +23,32 @@ class Registro extends Component {
 
     registrarUsuario(email, contra, usuario){
          console.log('Intentando registrar:', email, usuario);
-        if(
-            (
-                email !== '' &&
-                contra !== '' &&
-                usuario !== ''
-            )
-        ){
+        if (
+          email !== '' &&
+          contra !== '' &&
+          usuario !== ''
+        ) {
           auth.createUserWithEmailAndPassword(email, contra)
-          .then(() => {
-
-            db.collection('users')
-            .add({
-                email: email.toLowerCase(),
-                usuario: usuario
-            })
             .then(() => {
-                this.setState({ error: '' }); 
-                auth.signOut();
-                this.props.navigation.navigate('LogIn');
+              db.collection('users')
+                .add({
+                  email: email.toLowerCase(),
+                  usuario: usuario
+                })
+                .then(() => {
+                  this.setState({ error: '' }); 
+                  auth.signOut();
+                  this.props.navigation.navigate('LogIn');
+                });
+            })
+            .catch(error => {
+              this.setState({ error: error.message });
             });
-
-          })
-          .catch(error => {
-            this.setState({ error: error.message }) ; 
-        });
+        } else {
+          this.setState({ error: 'Por favor, complete todos los campos.' });
+        }
     }
-    }
+    
 
     render(){
             console.log('Usuario actual:', auth.currentUser);

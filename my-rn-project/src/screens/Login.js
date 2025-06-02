@@ -29,7 +29,7 @@ export default class Login extends Component {
                 this.props.navigation.navigate('Tab')
             })
             .catch(err => {
-            this.setState({ error: err });
+                this.setState({ error: err.message }); 
             });
         } else {
             this.setState({ error: 'Por favor, complete ambos campos.' });
@@ -59,9 +59,6 @@ export default class Login extends Component {
         {this.state.error !== '' ? (
           <Text style={styles.error}>{this.state.error}</Text>
         ) : null}
-         {this.state.error !== '' && (
-                        <Text style={styles.error}>{this.state.error}</Text> 
-                    )}
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.login(this.state.email, this.state.password)}
