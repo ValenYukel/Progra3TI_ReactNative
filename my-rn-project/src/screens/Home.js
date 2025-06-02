@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase/app';
-
+import Publicacion from '../components/Publicacion';
 
 export default class Home extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ export default class Home extends Component {
    render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> Home - PuppyGram </Text>
+        <Text style={styles.title}> PuppyGram </Text>
 
         {this.state.loading ? (
           <View style={styles.loadingContainer}>
@@ -61,27 +61,10 @@ export default class Home extends Component {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.posteo}>
-                <Text style={styles.posteoAuthor}>
-                  {item.data.owner ? item.data.owner : 'Anónimo'}
-                </Text>
-
-                <Text style={styles.posteoContent}>{item.data.texto}</Text>
-
-                <Text style={styles.posteoLikes}>
-                  Likes: {item.data.likes ? item.data.likes.length : 0}
-                </Text>
-
-                <TouchableOpacity
-                  style={styles.likeButton}
-                  onPress={() =>
-                    this.cambioLike(item.id, item.data.likes ? item.data.likes : [])
-                  }
-                >
-                  <Text style={styles.likeButtonText}>
-                    {item.data.likes && item.data.likes.includes(auth.currentUser.email)
-                      ? 'Dislikear': 'Likear'}
-                  </Text>
-                </TouchableOpacity>
+                <Publicacion
+                  data={item.data}
+                  id={item.id}
+                  /> 
               </View>
             )}
           />
