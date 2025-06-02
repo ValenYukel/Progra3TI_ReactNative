@@ -17,8 +17,19 @@ export default function BottomTabs() {
             tabBarIcon: () => <FontAwesome name='home' size={24} color={'black'} />
           }}
           />
-        <Tab.Screen name='Perfil' component={Perfil} />
-        <Tab.Screen name='CrearPosteo' component={CrearPosteo} />
+        <Tab.Screen
+          name='Perfil'
+          component={Perfil}
+          options={{
+            tabBarIcon: () => <FontAwesome name='user' size={24} color={'black'} />
+          }}
+        />
+        <Tab.Screen name='CrearPosteo' 
+        component={CrearPosteo}
+        options={{
+          tabBarIcon: () => <FontAwesome name='plus' size={24} color={'black'} />
+        }} 
+        />
     </Tab.Navigator>
   )
 }

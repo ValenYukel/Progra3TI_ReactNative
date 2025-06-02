@@ -50,8 +50,7 @@ export default class Perfil extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>Mi Perfil</Text>        
-        <Text style={styles.usuario}>{this.state.usuario}</Text>
+        <Text style={styles.titulo}>{this.state.usuario}</Text>
         <Text style={styles.email}>{auth.currentUser.email}</Text>
 
         <FlatList
@@ -79,12 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#e75480',
     marginBottom: 10,
-    alignSelf: 'center'
-  },
-  usuario: {
-    fontSize: 20,
-    color: '#e75480',
-    marginBottom: 5,
     alignSelf: 'center'
   },
   email: {
