@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import firebase from 'firebase/app'
 import { auth, db } from '../firebase/config'
+import { FontAwesome } from '@expo/vector-icons';
 
 
 export default class Publicacion extends Component {
@@ -41,8 +42,8 @@ export default class Publicacion extends Component {
       <View style={styles.container}>
         <Text style={styles.email}>{this.props.data.email}</Text>
         <Text style={styles.texto}>{this.props.data.texto}</Text>
-        <Text style={styles.fecha}>Publicado: {date.toDateString()}</Text>
-        <Text style={styles.likes}>Likes: {this.state.cantLikes}</Text>
+        <Text style={styles.fecha}>On {date.toDateString()}</Text>
+        <Text style={styles.likes}><FontAwesome name="heart" size={16} color="#FF6B6B" /> {this.state.cantLikes}</Text>
         {
           this.state.likeado ?
           <TouchableOpacity style={styles.boton} onPress={() => this.dislikePost()}>
@@ -61,45 +62,50 @@ export default class Publicacion extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#ffe4ec',
-        padding: 20,
-        marginVertical: 10,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
-        elevation: 2,
-    },
-    email: {
-        fontWeight: 'bold',
-        marginBottom: 5,
-        color: '#e75480'
-    },
-    texto: {
-        fontSize: 16,
-        marginBottom: 10,
-        color: '#333'
-    },
-    fecha: {
-        fontSize: 12,
-        color: '#888',
-        marginBottom: 5
-    },
-    likes: {
-        fontSize: 14,
-        color: '#e75480',
-        marginBottom: 10
-    },
-    boton: {
-        backgroundColor: 'pink',
-        padding: 10,
-        alignItems: 'center',
-        borderRadius: 5
-    },
-    botonTexto: {
-        color: 'white',
-        fontWeight: 'bold'
-    }
+  container: {
+    backgroundColor: '#F8F9FA', 
+    padding: 20,
+    marginVertical: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 1,
+    borderWidth: 1,
+    borderColor: '#ADB5BD', 
+  },
+  email: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#4C6EF5' 
+  },
+  texto: {
+    fontSize: 16,
+    marginBottom: 10,
+    color: '#212529' 
+  },
+  fecha: {
+    fontSize: 13,
+    color: '#212529', 
+    marginBottom: 5
+  },
+  likes: {
+    fontSize: 14,
+    color: '#364FC7', 
+    marginBottom: 10
+  },
+  boton: {
+    backgroundColor: '#4C6EF5', 
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 5
+  },
+  botonActivo: {
+    backgroundColor: '#364FC7', 
+  },
+  botonTexto: {
+    color: 'white',
+    fontWeight: 'bold'
+  }
 });

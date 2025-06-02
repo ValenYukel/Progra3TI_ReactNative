@@ -22,6 +22,7 @@ export default class Home extends Component {
           posts.push({
             id: doc.id,
             data: doc.data(),
+            idx: idx,
           });
         });
         this.setState({
@@ -65,7 +66,7 @@ export default class Home extends Component {
                 <Publicacion
                   data={item.data}
                   id={item.id}
-                  idx={item.index}
+                  idx={item.idx}
                   /> 
 
               </View>
