@@ -41,7 +41,7 @@ class Registro extends Component {
             .then(() => {
                 this.setState({ error: '' }); 
                 auth.signOut();
-                this.props.navigation.navigate('LogIn'); // chequear porque no va al login esto manana
+                this.props.navigation.navigate('LogIn');
             });
 
           })
