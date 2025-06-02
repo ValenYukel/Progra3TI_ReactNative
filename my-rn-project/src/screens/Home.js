@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
 title: {
   fontSize: 24,
   marginBottom: 15,
+  fontWeight: 'bold',
   textAlign: 'center',
   color: '#1976D2', 
 },
@@ -111,14 +112,5 @@ title: {
   },
   posteoLikes: {
     marginBottom: 5,
-  },
-  likeButton: {
-    backgroundColor: 'pink',
-    padding: 8,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  likeButtonText: {
-    color: 'black',
-  },
+  }
 });

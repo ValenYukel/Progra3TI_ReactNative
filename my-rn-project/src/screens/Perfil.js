@@ -14,7 +14,9 @@ export default class Perfil extends Component {
   }
 
   componentDidMount(){
-    db.collection('posts').where('email', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
+    db.collection('posts')
+    .where('email', '==', auth.currentUser.email)
+    .onSnapshot((docs) => {
       let posts = [];
       docs.forEach((doc) => posts.push({
         id: doc.id,
@@ -70,24 +72,24 @@ export default class Perfil extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffe4ec',
+    backgroundColor: '#E0F7FA', 
     padding: 20,
   },
   titulo: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#e75480',
+    color: '#1976D2',
     marginBottom: 10,
     alignSelf: 'center'
   },
   email: {
     fontSize: 16,
-    color: '#333',
+    color: '#1976D2',
     marginBottom: 20,
     alignSelf: 'center'
   },
   boton: {
-    backgroundColor: 'pink',
+    backgroundColor: '#1976D2',
     padding: 12,
     alignItems: 'center',
     borderRadius: 8,
