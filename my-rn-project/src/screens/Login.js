@@ -31,7 +31,7 @@ export default class Login extends Component {
             .catch(err)
             this.setState({ error: 'Email o contraseña incorrectos. Por favor, intente nuevamente.' });
         } else {
-      this.setState({ error: 'Por favor, complete ambos campos.' });
+      this.setState({ error: error.message });
     }
     }
 
@@ -58,7 +58,9 @@ export default class Login extends Component {
         {this.state.error !== '' ? (
           <Text style={styles.error}>{this.state.error}</Text>
         ) : null}
-
+         {this.state.error !== '' && (
+                        <Text style={styles.error}>{this.state.error}</Text> 
+                    )}
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.login(this.state.email, this.state.password)}
@@ -80,28 +82,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#E0F7FA',
     padding: 20,
   },
   title: {
     fontSize: 28,
+    color: '#1976D2',
     marginBottom: 20,
     textAlign: 'center',
   },
   input: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'blue',
+    backgroundColor: 'white',
     padding: 12,
     borderRadius: 5,
     marginBottom: 15,
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: 'blue',
     padding: 12,
     borderRadius: 5,
     alignItems: 'center',
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     fontSize: 16,
   },
   error: {
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: 15,
-    color: 'black',
+    color: 'blue',
     textAlign: 'center',
   },
 });

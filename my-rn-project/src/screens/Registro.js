@@ -40,6 +40,7 @@ class Registro extends Component {
             })
             .then(() => {
                 this.setState({ error: '' }); 
+                auth.signOut();
                 this.props.navigation.navigate('LogIn'); // chequear porque no va al login esto manana
             });
 
@@ -95,20 +96,20 @@ class Registro extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffe4ec',
+    backgroundColor: '#E0F7FA',
     padding: 24,
     justifyContent: 'center',
   },
   titulo: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#e75480',
+    color: '#1976D2',
     marginBottom: 20,
     alignSelf: 'center'
   },
   input: {
     borderWidth: 1,
-    borderColor: 'pink',
+    borderColor: 'blue',
     borderRadius: 8,
     padding: 12,
     marginBottom: 16,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   boton: {
-    backgroundColor: 'pink',
+    backgroundColor: 'blue',
     padding: 14,
     alignItems: 'center',
     borderRadius: 8,
@@ -134,10 +135,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   link: {
-    color: '#e75480',
+    color: 'blue',
     textAlign: 'center',
+    borderRadius: 8,
     marginTop: 10,
-    textDecorationLine: 'underline'
+    marginBottom: 10
   }
 });
 export default Registro
