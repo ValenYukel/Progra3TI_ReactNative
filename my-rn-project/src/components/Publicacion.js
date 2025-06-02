@@ -8,8 +8,11 @@ import { FontAwesome } from '@expo/vector-icons';
 export default class Publicacion extends Component {
     constructor(props){
         super(props)
+        const yaLikeado = this.props.data.likes
+          ? this.props.data.likes.includes(auth.currentUser.email)
+          : false;
         this.state = {
-            likeado: false,
+            likeado: yaLikeado,
             cantLikes: this.props.data.likes ? this.props.data.likes.length : 0
         }
     }

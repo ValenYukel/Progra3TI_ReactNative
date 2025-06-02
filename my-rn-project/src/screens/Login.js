@@ -28,11 +28,12 @@ export default class Login extends Component {
             .then(() => {
                 this.props.navigation.navigate('Tab')
             })
-            .catch(err)
-            this.setState({ error: 'Email o contraseña incorrectos. Por favor, intente nuevamente.' });
+            .catch(err => {
+            this.setState({ error: err });
+            });
         } else {
-      this.setState({ error: error.message });
-    }
+            this.setState({ error: 'Por favor, complete ambos campos.' });
+        }
     }
 
       render() {

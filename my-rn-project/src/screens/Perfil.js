@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, FlatList, StyleSheet} from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../firebase/config'
 import Publicacion from '../components/Publicacion'
+import { FontAwesome } from '@expo/vector-icons'
 
 
 export default class Perfil extends Component {
@@ -18,6 +19,7 @@ export default class Perfil extends Component {
     .where('email', '==', auth.currentUser.email)
     .onSnapshot((docs) => {
       let posts = [];
+      console.log('Documentos obtenidos:', docs.docs);
       docs.forEach((doc) => posts.push({
         id: doc.id,
         data: doc.data()
@@ -41,14 +43,16 @@ export default class Perfil extends Component {
         })
         }
     })
-      
-    
+  }
+  borrarPosteo(id){
+    db.collection('posts').doc(id).delete()
+    .catch(e => console.log('Error al eliminar el posteo', e))
   }
 
   logout(){
     auth.signOut()
     .then(()=> this.props.navigation.navigate('LogIn'))
-    .catch(err => console.log('error en signout', err))
+    .catch(e => console.log('error en signout', e))
   }
   
   render(){
@@ -59,11 +63,19 @@ export default class Perfil extends Component {
 
         <FlatList
           data={this.state.posteos}
-          keyExtractor={(item) =>  item.id.toString()}
-          renderItem = {({ item }) => <Publicacion id={item.id} data={item.data} /> }
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={{ marginBottom: 10 }}>
+              <Publicacion id={item.id} data={item.data} />
+              <TouchableOpacity style={styles.botonBorrar} onPress={() => this.borrarPosteo(item.id)}>
+                <FontAwesome name="trash" size={14} color="white" />
+              </TouchableOpacity>
+            </View>
+          )}
         />
 
         <TouchableOpacity style={styles.boton} onPress={() => this.logout()}>
+          <FontAwesome name="sign-out" size={20} color="white" />
           <Text style={styles.botonTexto}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
@@ -101,5 +113,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16
-  }
+  },
+  botonBorrar: {
+    backgroundColor: '#FF6B6B', 
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+    marginTop: 4,
+  },
 });
