@@ -16,7 +16,7 @@ export default class Home extends Component {
   componentDidMount() {
     db.collection('posts')
       .orderBy('createdAt', 'desc')
-      .onSnapshot((docs) => {
+      .onSnapshot((docs, idx) => {
         let posts = [];
         docs.forEach((doc) => {
           posts.push({
@@ -65,6 +65,7 @@ export default class Home extends Component {
                 <Publicacion
                   data={item.data}
                   id={item.id}
+                  idx={item.index}
                   /> 
 
               </View>
@@ -78,14 +79,16 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 15,
-    textAlign: 'center',
-  },
+  flex: 1,
+  padding: 20,
+  backgroundColor: '#E0F7FA', 
+},
+title: {
+  fontSize: 24,
+  marginBottom: 15,
+  textAlign: 'center',
+  color: '#1976D2', 
+},
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',

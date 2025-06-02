@@ -53,27 +53,31 @@ export default class CrearPosteo extends Component {
 
 const styles = StyleSheet.create({
   container: { 
-  padding: 20 
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#E0F7FA' // celeste claro de fondo
   },
   input: { 
-  borderWidth: 1,
-  borderColor: 'pink', 
-  marginVertical: 10, 
-  padding: 10, 
-  minHeight: 60 
+    borderWidth: 1,
+    borderColor: '#81D4FA', // borde celeste
+    marginVertical: 10, 
+    padding: 10, 
+    minHeight: 60,
+    borderRadius: 5,
+    backgroundColor: '#FFFFFF' // blanco en el input
   },
   boton: { 
-  backgroundColor: 'pink', 
-  padding: 10, 
-  alignItems: 'center', 
-  borderRadius: 5 
+    backgroundColor: '#1976D2', // azul fuerte igual a Publicacion
+    padding: 10, 
+    alignItems: 'center', 
+    borderRadius: 5 
   },
   botonTexto: { 
-  color: 'white', 
-  fontWeight: 'bold' 
- },
+    color: 'white', 
+    fontWeight: 'bold' 
+  },
   error: { 
-  color: 'red', 
-  marginVertical: 5 
- }
+    color: 'red', 
+    marginVertical: 5 
+  }
 });
