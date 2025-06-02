@@ -1,5 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
+import firebase from 'firebase/app'
+import { auth, db } from '../firebase/config'
 
 
 export default class Publicacion extends Component {
@@ -11,8 +13,7 @@ export default class Publicacion extends Component {
         }
     }
     likePost(){
-        db
-        .collection('posts')
+        db.collection('posts')
         .doc(this.props.id)
         .update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
@@ -24,8 +25,7 @@ export default class Publicacion extends Component {
     }
 
     dislikePost(){
-        db
-        .collection('posts')
+        db.collection('posts')
         .doc(this.props.id)
         .update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
@@ -36,29 +36,22 @@ export default class Publicacion extends Component {
         }))
     }
   render() {
+    const date = new Date(this.props.data.createdAt);
     return (
-      <View>
-        <Text>{this.props.data.email}</Text>
-        <Text>{this.props.data.texto}</Text>
-        <Text>Publicado: {this.props.data.createdAt}</Text>
-        <Text>Likes: {this.state.cantLikes}</Text>
+      <View style={styles.container}>
+        <Text style={styles.email}>{this.props.data.email}</Text>
+        <Text style={styles.texto}>{this.props.data.texto}</Text>
+        <Text style={styles.fecha}>Publicado: {date.toDateString()}</Text>
+        <Text style={styles.likes}>Likes: {this.state.cantLikes}</Text>
         {
-            this.state.likeado ?
-            <TouchableOpacity
-                onPress={() => this.dislikePost()}
-            >
-                <Text>
-                    Dislike
-                </Text>
-            </TouchableOpacity>
-            :
-            <TouchableOpacity
-                onPress={() => this.likePost()}
-            >
-                <Text>
-                    Like
-                </Text>
-            </TouchableOpacity>
+          this.state.likeado ?
+          <TouchableOpacity style={styles.boton} onPress={() => this.dislikePost()}>
+            <Text style={styles.botonTexto}>Dislike</Text>
+          </TouchableOpacity>
+          :
+          <TouchableOpacity style={styles.boton} onPress={() => this.likePost()}>
+            <Text style={styles.botonTexto}>Like</Text>
+          </TouchableOpacity>
         }
       </View>
     )

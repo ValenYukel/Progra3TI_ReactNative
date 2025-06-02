@@ -9,19 +9,19 @@ export default function StackNavigation() {
     return (
        
        
-        <Stack.Navigator>
+        <Stack.Navigator> 
+        <Stack.Screen 
+        name='LogIn' 
+        component={Login}
+        options={
+            {
+                headerShown: false
+            }
+        }
+        />
         <Stack.Screen 
        name='Register' 
        component={Registro}
-       options={
-           {
-               headerShown: false
-           }
-       }
-       />
-       <Stack.Screen 
-       name='LogIn' 
-       component={Login}
        options={
            {
                headerShown: false

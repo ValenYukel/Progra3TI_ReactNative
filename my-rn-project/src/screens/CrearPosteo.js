@@ -14,7 +14,7 @@ export default class CrearPosteo extends Component {
     }
 
     crearPosteo() {
-    if (this.state.texto.trim() !== '') {
+
       db.collection('posts')
         .add({
           texto: this.state.texto,
@@ -27,10 +27,10 @@ export default class CrearPosteo extends Component {
         .catch(e => {
           this.setState({ error: e.message });
         });
-    } else {
-      this.setState({ error: 'El posteo no puede estar vacío.' });
-    }
-  }
+    } 
+
+    
+  
 
     render(){
         return (

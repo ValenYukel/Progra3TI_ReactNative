@@ -14,7 +14,7 @@ export default class Perfil extends Component {
   }
 
   componentDidMount(){
-    db.collection('posts').orderBy('createdAt', 'desc').onSnapshot((docs) => {
+    db.collection('posts').where('email', '==', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot((docs) => {
       let posts = [];
       docs.forEach((doc) => posts.push({
         id: doc.id,
@@ -50,7 +50,7 @@ export default class Perfil extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.titulo}>MI Perfil</Text>        
+        <Text style={styles.titulo}>Mi Perfil</Text>        
         <Text style={styles.usuario}>{this.state.usuario}</Text>
         <Text style={styles.email}>{auth.currentUser.email}</Text>
 
