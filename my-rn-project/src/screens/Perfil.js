@@ -22,6 +22,8 @@ export default class Perfil extends Component {
         id: doc.id,
         data: doc.data()
       }))
+
+      posts.sort((a, b)=> b.data.createdAt- a.data.createdAt )
       this.setState({
         posteos: posts
       })

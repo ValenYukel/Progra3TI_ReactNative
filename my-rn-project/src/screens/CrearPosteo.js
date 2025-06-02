@@ -23,6 +23,7 @@ export default class CrearPosteo extends Component {
         })
         .then(() => {
           this.setState({ texto: '', error: '' });
+          this.props.navigation.navigate('Home'); 
         })
         .catch(e => {
           this.setState({ error: e.message });
@@ -55,19 +56,19 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1,
     padding: 20,
-    backgroundColor: '#E0F7FA' // celeste claro de fondo
+    backgroundColor: '#E0F7FA' 
   },
   input: { 
     borderWidth: 1,
-    borderColor: '#81D4FA', // borde celeste
+    borderColor: '#81D4FA', 
     marginVertical: 10, 
     padding: 10, 
     minHeight: 60,
     borderRadius: 5,
-    backgroundColor: '#FFFFFF' // blanco en el input
+    backgroundColor: '#FFFFFF' 
   },
   boton: { 
-    backgroundColor: '#1976D2', // azul fuerte igual a Publicacion
+    backgroundColor: '#1976D2', 
     padding: 10, 
     alignItems: 'center', 
     borderRadius: 5 

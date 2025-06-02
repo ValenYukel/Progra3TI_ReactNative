@@ -16,13 +16,13 @@ export default class Home extends Component {
   componentDidMount() {
     db.collection('posts')
       .orderBy('createdAt', 'desc')
-      .onSnapshot((docs, idx) => {
+      .onSnapshot((docs) => {
         let posts = [];
         docs.forEach((doc) => {
           posts.push({
             id: doc.id,
             data: doc.data(),
-            idx: idx,
+
           });
         });
         this.setState({
@@ -49,7 +49,7 @@ export default class Home extends Component {
    render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> PuppyGram </Text>
+        <Text style={styles.title}> CopyGram </Text>
 
         {this.state.loading ? (
           <View style={styles.loadingContainer}>
@@ -66,7 +66,6 @@ export default class Home extends Component {
                 <Publicacion
                   data={item.data}
                   id={item.id}
-                  idx={item.idx}
                   /> 
 
               </View>
